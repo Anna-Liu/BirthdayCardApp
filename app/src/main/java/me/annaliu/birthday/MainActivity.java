@@ -5,14 +5,29 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
+    MediaPlayer mySound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        MediaPlayer mySound = MediaPlayer.create(this, R.raw.music);
-        mySound.start();
+        mySound = MediaPlayer.create(this, R.raw.music);
+        mySound.start(); //automatically starts music
         mySound.setLooping(true);
         mySound.setVolume(100,100);
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySound.pause();//pauses music when app is backgrounded
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mySound.start();//resumes music when app is active
+    }
 }
+
+//change App Bar color
